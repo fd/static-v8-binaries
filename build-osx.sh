@@ -21,7 +21,7 @@ gclient sync
 
 # Build v8
 export GYP_DEFINES="mac_deployment_target=$(bash -c "sw_vers -productVersion | sed 's|.[0-9]*$||'")"
-make -j5 x64.release GYPFLAGS="-Dv8_use_external_startup_data=0 -Dv8_enable_i18n_support=0 -Dv8_enable_gdbjit=0"
+make -j5 x64.release GYPFLAGS="-Dv8_use_external_startup_data=0 -Dv8_enable_i18n_support=0 -Dv8_enable_gdbjit=0 -Dtest_isolation_mode=noop"
 strip -S out/x64.release/libv8_*.a
 
 # Bundle v8
