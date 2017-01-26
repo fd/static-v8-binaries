@@ -1,14 +1,26 @@
 language: generic
 
 os:
-  - linux
-  - osx
+- linux
+- osx
 
 env:
   matrix:
-    - V8_VERSION=5.4
-    - V8_VERSION=5.5
-    # - V8_VERSION=5.6
+  - V8_VERSION=5.4
+  - V8_VERSION=5.5
+  - V8_VERSION=5.6
 
 script:
 - bash "build-${TRAVIS_OS_NAME}.sh"
+
+deploy:
+  skip_cleanup: true
+  provider: s3
+  access_key_id: AKIAJZ7Y2JLXRD4B3EAA
+  secret_access_key:
+    secure: RRpmUIjtnBzV+W2z8znUojqMPcMlJPls4e9IqwcZQgdZbkls2Yn7IHgws1pRkYlAdQ4DpcI6V9vi3hKimjsOB8RVG35lGI3A8uBTlA91CumdiYDNM4d4nMgC0CLDg3LhjCVuya4jN94WTyBB4MC7DcztShpTJkNLfmG0htBDh82GRnpfO3bHcYaxm6jQEvMwIwy4+H9oGLdu7Im0aGEV4bi8dR4eF7krzUl5ugMfO++o6Pa4iH5qbLTvoUxXD+3cr74XuuB/HpfA6sYUO/6gics2L/Y9LiQs0DPmEIka6eWWdOU1aLu+t6QaDwhRRQzmYo1HGV05d3hRBCMHe8RqrRs7FLnKACij/WCjWqPGjA1qkcpVfpl/kzmwIjWpd3p8WXRar0fxNbglxAUINgzlJXcZdb4OWuQz9qA2+cHo0gN3+tWR7SsYQIlPwCbpiqr2dEImw0kiXsZPIcOxAoJ+ouwcoE7JOGf6mcglCmqYWzJXb7t/4A+x/aswxkny8WbBHYlN2QNKPz5eTPdOaOCW2Yo7wZInozrFCoOahwDS9KaN3+tW2toLzXWHo/JxKF8xWHzx5i/dsdp222B/nm9qnvIO+uSOfhHQ/mu9qe27kgGzA7CiBzSIaFCTLuNMLa3nMeJwYgxSG2VfRgm7GCvZdBxWOG7tGaiXQ8gE9c3NLco=
+  bucket: static-v8-binaries
+  local-dir: build/dist
+  acl: public_read
+  on:
+    repo: fd/static-v8-binaries

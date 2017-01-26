@@ -31,7 +31,7 @@ strip -S out/x64.release/libv8_*.a
 
 # Bundle v8
 rm -rf ${WORKSPACE}/bundle
-mkdir -p ${WORKSPACE}/bundle/libv8 ${WORKSPACE}/bundle/include
+mkdir -p ${WORKSPACE}/bundle/libv8 ${WORKSPACE}/bundle/include ${WORKSPACE}/dist/${TRAVIS_BUILD_NUMBER}
 cp out/x64.release/libv8_base.a ${WORKSPACE}/bundle/libv8/
 cp out/x64.release/libv8_libbase.a ${WORKSPACE}/bundle/libv8/
 cp out/x64.release/libv8_snapshot.a ${WORKSPACE}/bundle/libv8/
@@ -40,7 +40,7 @@ cp out/x64.release/libv8_libplatform.a ${WORKSPACE}/bundle/libv8/
 cp -r include/libplatform ${WORKSPACE}/bundle/include/
 cp -r include/*.h ${WORKSPACE}/bundle/include/
 ln -s . ${WORKSPACE}/bundle/include/include
-tar -C ${WORKSPACE}/bundle -czf ${WORKSPACE}/v8-${V8_VERSION}-macos.tar.gz .
+tar -C ${WORKSPACE}/bundle -czf ${WORKSPACE}/dist/${TRAVIS_BUILD_NUMBER}/v8-${V8_VERSION}-macos.tar.gz .
 
 # List
 ls -l ${WORKSPACE}
