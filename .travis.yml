@@ -1,0 +1,8 @@
+language: generic
+
+os:
+  - linux
+  - osx
+
+script:
+- bash "build-${TRAVIS_OS_NAME}.sh"
