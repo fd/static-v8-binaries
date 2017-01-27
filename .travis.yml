@@ -6,9 +6,9 @@ os:
 
 env:
   matrix:
-  - V8_VERSION=5.4
-  - V8_VERSION=5.5
-  - V8_VERSION=5.6
+  - DEV_DELTA=0
+  - DEV_DELTA=1
+  - DEV_DELTA=2
 
 script:
 - bash "build-${TRAVIS_OS_NAME}.sh"
