@@ -1,6 +1,6 @@
 set -e -x
 
-V8_VERSION=$(go run ./get-version -delta ${DEV_DELTA:-0})
+V8_VERSION=$(go run ./get-version.go -delta ${DEV_DELTA:-0})
 
 # make workspace
 rm -rf ./build
