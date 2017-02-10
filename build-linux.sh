@@ -26,18 +26,19 @@ rm gypfiles/all.gyp.tmp
 
 # Build v8
 make -j5 x64.release GYPFLAGS="-Dv8_use_external_startup_data=0 -Dv8_enable_gdbjit=0"
+for lib in `find out/x64.release/obj.target/third_party/icu/ -name '*.a'`;
+  do ar -t $lib | xargs ar rvs $lib.new && mv -v $lib.new $lib;
+done
 for lib in `find out/x64.release/obj.target/src/ -name '*.a'`;
   do ar -t $lib | xargs ar rvs $lib.new && mv -v $lib.new $lib;
 done
+ls -l out/x64.release/obj.target/third_party/icu/
 
 # Bundle v8
 rm -rf ${WORKSPACE}/bundle
 mkdir -p ${WORKSPACE}/bundle/libv8 ${WORKSPACE}/bundle/include ${WORKSPACE}/dist/${TRAVIS_BUILD_NUMBER}
-cp out/x64.release/obj.target/src/libv8_base.a ${WORKSPACE}/bundle/libv8/
-cp out/x64.release/obj.target/src/libv8_libbase.a ${WORKSPACE}/bundle/libv8/
-cp out/x64.release/obj.target/src/libv8_snapshot.a ${WORKSPACE}/bundle/libv8/
-cp out/x64.release/obj.target/src/libv8_libsampler.a ${WORKSPACE}/bundle/libv8/
-cp out/x64.release/obj.target/src/libv8_libplatform.a ${WORKSPACE}/bundle/libv8/
+cp out/x64.release/obj.target/third_party/icu/*.a ${WORKSPACE}/bundle/libv8/
+cp out/x64.release/obj.target/src/*.a             ${WORKSPACE}/bundle/libv8/
 cp -r include/libplatform ${WORKSPACE}/bundle/include/
 cp -r include/*.h ${WORKSPACE}/bundle/include/
 tar -C ${WORKSPACE}/bundle -czf ${WORKSPACE}/dist/${TRAVIS_BUILD_NUMBER}/v8-${V8_VERSION}-linux.tar.gz .
