@@ -25,7 +25,7 @@ cat gypfiles/all.gyp.tmp | grep -v '/test' > gypfiles/all.gyp
 rm gypfiles/all.gyp.tmp
 
 # Build v8
-make -j5 x64.release GYPFLAGS="-Dv8_use_external_startup_data=0 -Dv8_enable_i18n_support=0 -Dv8_enable_gdbjit=0"
+make -j5 x64.release GYPFLAGS="-Dv8_use_external_startup_data=0 -Dv8_enable_gdbjit=0"
 for lib in `find out/x64.release/obj.target/src/ -name '*.a'`;
   do ar -t $lib | xargs ar rvs $lib.new && mv -v $lib.new $lib;
 done

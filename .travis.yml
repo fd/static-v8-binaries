@@ -10,6 +10,12 @@ env:
   - DEV_DELTA=1
   - DEV_DELTA=2
 
+matrix:
+  allow_failures:
+  - env: DEV_DELTA=0
+  - env: DEV_DELTA=1
+    os:  osx
+
 script:
 - bash "build-${TRAVIS_OS_NAME}.sh"
 
