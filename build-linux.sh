@@ -40,7 +40,6 @@ cp out/x64.release/obj.target/src/libv8_libsampler.a ${WORKSPACE}/bundle/libv8/
 cp out/x64.release/obj.target/src/libv8_libplatform.a ${WORKSPACE}/bundle/libv8/
 cp -r include/libplatform ${WORKSPACE}/bundle/include/
 cp -r include/*.h ${WORKSPACE}/bundle/include/
-ln -s . ${WORKSPACE}/bundle/include/include
 tar -C ${WORKSPACE}/bundle -czf ${WORKSPACE}/dist/${TRAVIS_BUILD_NUMBER}/v8-${V8_VERSION}-linux.tar.gz .
 
 # List
